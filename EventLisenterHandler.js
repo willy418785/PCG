@@ -1,7 +1,7 @@
 class EventListenerHandler{
-    constructor(inputDocument, playerKeyboardInputObj) {
-        this.playerKeyboardInputObj = playerKeyboardInputObj;
+    constructor(inputDocument,  playerInput) {
         this.inputDocument = inputDocument;
+        this.playerInput = playerInput;
     }
     AddEventListener(){
         var _this = this;
