@@ -10,8 +10,10 @@ var FRAME_INTERVAL = 1000 / FPS;
 //   map[e.keyCode] = e.type == 'keydown';
 // }
 //run();
-
-function run() {
+var temp = 0;
+var characterDraw;
+var foo;
+function initialize(){
     var canvas = document.getElementById("canvas");
     canvas.width = 500;
     canvas.height = 400;
@@ -19,7 +21,14 @@ function run() {
     y = canvas.height / 2;
     var ctx = canvas.getContext("2d");
     var player = new Character(gravityCoefficient, characterWidth, characterHeight, ATTACK_ANIMATION_FRAME, TURN_AROUND_FRAME, x, y);
-    var characterDraw = new CharacterDraw(player, canvas);
+    characterDraw = new CharacterDraw(player, canvas);
     characterDraw.draw();
+    foo = new EventListenerHandler(document, temp);
+    foo.AddEventListener();
+    setTimeout("run()", FRAME_INTERVAL);
+}
+function run() {
+    characterDraw.draw();
+    console.log(foo.playerKeyboardInputObj);
     setTimeout("run()", FRAME_INTERVAL);
 }
