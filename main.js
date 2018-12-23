@@ -13,6 +13,7 @@ var FRAME_INTERVAL = 1000 / FPS;
 var temp = 0;
 var characterDraw;
 var foo;
+var playerInput;
 function initialize(){
     var canvas = document.getElementById("canvas");
     canvas.width = 500;
@@ -23,12 +24,13 @@ function initialize(){
     var player = new Character(gravityCoefficient, characterWidth, characterHeight, ATTACK_ANIMATION_FRAME, TURN_AROUND_FRAME, x, y);
     characterDraw = new CharacterDraw(player, canvas);
     characterDraw.draw();
-    foo = new EventListenerHandler(document, temp);
-    foo.AddEventListener();
+    playerInput = new PlayerInput();
+    foo = new EventListenerHandler(document, playerInput);
+    foo.AddKeypressEventListener();
+    foo.AddClickEventListener();
     setTimeout("run()", FRAME_INTERVAL);
 }
 function run() {
     characterDraw.draw();
-    console.log(foo.playerKeyboardInputObj);
     setTimeout("run()", FRAME_INTERVAL);
 }
