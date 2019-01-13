@@ -7,6 +7,8 @@ class Character {
         TURN_AROUND_FRAME,
         x,
         y,
+        verticalSpeedAccelerationUnit,
+        horizontalSpeedAccelerationUnit,
         verticalSpeadUpperBound,
         verticalSpeadLowerBound,
         horizontalSpeadUpperBound,
@@ -15,7 +17,7 @@ class Character {
         verticalSpeedAccelerationLowerBound,
         horizontalSpeedAccelerationUpperBound,
         horizontalSpeedAccelerationLowerBound) {
-            
+
         this.verticalSpeed = 0; // positive direction is down
         this.verticalSpeedAcceleration = 0;
         this.horizontalSpeed = 0; // positive direction is right
@@ -26,6 +28,8 @@ class Character {
         this.isTurningAround = false;
         this.x = x;
         this.y = y;
+        this.verticalSpeedAccelerationUnit = verticalSpeedAccelerationUnit;
+        this.horizontalSpeedAccelerationUnit = horizontalSpeedAccelerationUnit;
         this.gravityCoefficient = gravityCoefficient;
         this.characterWidth = characterWidth;
         this.characterHeight = characterHeight;
