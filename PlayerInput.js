@@ -10,9 +10,9 @@ class PlayerInput{
             'attack2':false,
             'menu':false
         };
-        this.isUpdated = false;
+        this.isProccessed = false;
     }
     initialize(){
-        this.isUpdated = false;
+        this.isProccessed = false;
     }
 }
