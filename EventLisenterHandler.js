@@ -10,6 +10,15 @@ class EventListenerHandler{
     AddClickEventListener(){
         var _this = this;
         this.inputDocument.addEventListener("mousedown", function(e){ _this.clickHandler(e); }, false); 
+        if (this.inputDocument.addEventListener) { // IE >= 9; other browsers   
+            this.inputDocument.addEventListener('contextmenu', function(e) {
+                e.preventDefault(); // reload 
+            }, false);
+        } else { // IE < 9, haven't been tested
+            this.inputDocument.attachEvent('oncontextmenu', function() {
+                window.event.returnValue = false;
+            });
+        }
     }
     clickHandler(e){
         if(e.button === 0){
