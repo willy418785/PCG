@@ -1,0 +1,55 @@
+@startuml
+participant main.js as main
+participant EventListenerHandler
+participant PlayerKeyboardInputHandler
+participant PlayerAction
+participant CharacterDraw
+
+' note over PlayerAction #c3c3c3
+' this is a static class
+' end note
+
+
+activate main
+
+'' this is for layout
+|||
+main -[hidden]-> main
+
+group Initialize
+    main -> EventListenerHandler : AddKeypressEventListener()
+    activate EventListenerHandler
+    main -> EventListenerHandler : AddClickEventListener()
+    main -> CharacterDraw ++ : draw()
+    deactivate CharacterDraw
+end
+
+[-> EventListenerHandler : *玩家按鍵輸入*
+EventListenerHandler -> EventListenerHandler :  clickHandler()\nkeyPressHandler()
+
+loop
+main -> PlayerKeyboardInputHandler : process()
+
+activate PlayerKeyboardInputHandler
+
+PlayerKeyboardInputHandler -> PlayerAction ++ : characterMove()\ncharacterAttack()
+
+PlayerAction -> PlayerAction : characterMoveRight()\ncharacterMoveLeft()\n......
+
+
+'' this is for layout
+PlayerAction -[hidden]> PlayerAction
+deactivate PlayerAction
+
+'' this is for layout
+PlayerAction -[hidden]-> PlayerKeyboardInputHandler
+
+
+deactivate PlayerKeyboardInputHandler
+
+main -> CharacterDraw ++ : draw()
+deactivate CharacterDraw
+end
+' player -> 
+'  main.js : 取像訊號
+@enduml
