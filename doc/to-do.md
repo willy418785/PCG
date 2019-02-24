@@ -3,3 +3,5 @@
 - 20190224
   - 實現私有變數
   - 實現靜態類別
+  - redesign 'PlayerKeyboardInputHandler'
+  - redesign 'PlayerAction'
