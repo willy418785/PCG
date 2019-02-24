@@ -1,0 +1,58 @@
+@startuml
+' left to right direction
+' skinparam linetype polyline
+
+'' Classes
+class DOM
+class Character{
+    x : int
+    y : int
+    characterWidth : int
+    characterHeight : int
+}
+class CharacterDraw{
+    formBasicShape()
+    draw()
+}
+class EventListenerHandler{
+    inputDocument : DOM
+    playerInput : PlayerInput
+    AddKeypressEventListener()
+    AddClickEventListener()
+    clickHandler()
+    keyPressHandler()
+}
+class PlayerInput{
+    playerInputList : Array
+    isProccessed : boolean
+    initialize()
+}
+class PlayerKeyboardInputHandler{
+    character : Character
+    playerInput : PlayerInput
+    process()
+}
+'' relationship
+CharacterDraw --up-> Character
+EventListenerHandler --up-> PlayerInput
+EventListenerHandler --up-> DOM
+PlayerKeyboardInputHandler --up-> PlayerInput
+PlayerKeyboardInputHandler  --up-> Character
+
+' layout
+' DOM -[hidden]- PlayerInput
+' DOM -[hidden]- PlayerInput
+' DOM -[hidden]- PlayerInput
+' DOM -[hidden]- PlayerInput
+' DOM -[hidden]- PlayerInput
+' Character -[hidden]- DOM
+' Character -[hidden]- DOM
+' Character -[hidden]- DOM
+' Character -[hidden]- DOM
+' DOM -[hidden]- DOM
+' CharacterDraw -right[hidden]- PlayerKeyboardInputHandler
+' PlayerKeyboardInputHandler -left[hidden]- CharacterDraw
+' PlayerKeyboardInputHandler -left[hidden]- CharacterDraw
+' PlayerKeyboardInputHandler -left[hidden]- CharacterDraw
+' EventListenerHandler -[hidden]- PlayerKeyboardInputHandler
+@enduml
