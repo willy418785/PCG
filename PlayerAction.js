@@ -1,26 +1,22 @@
 class PlayerAction{
-    constructor(character) {
-        this.character = character;
+    constructor() {
     }
-    characterMove(){
-        if(this.playerInput.isProcessed){
-            if(this.playerInput.playerInputList['right']){
-                character.horizontalSpeedAcceleration = character.horizontalSpeedAccelerationUnit// speedNext = speed + acceleration - fraction
-            }
-        }
+    characterMoveSideway(){
+        
     }
-    characterAttack(){
-        if(this.playerInput.isProcessed){
-            if(this.playerInput.playerInputList['right']){
-                character.horizontalSpeedAcceleration = character.horizontalSpeedAccelerationUnit// speedNext = speed + acceleration - fraction
-            }
-        }
+    characterMoveUp(){
+
     }
-    characterAttackMove(){
-        if(this.playerInput.isProcessed){
-            if(this.playerInput.playerInputList['right']){
-                character.horizontalSpeedAcceleration = character.horizontalSpeedAccelerationUnit// speedNext = speed + acceleration - fraction
-            }
-        }
+    characterMoveDown(){
+
+    }
+    characterAttackSideway(){
+
+    }
+    characterAttackUp(){
+
+    }
+    characterAttackDown(){
+
     }
 }
