@@ -1,7 +1,7 @@
 @startuml
 participant main.js as main
 participant EventListenerHandler
-participant PlayerKeyboardInputHandler
+participant PlayerInputProcessor
 participant PlayerAction
 participant CharacterDraw
 
@@ -10,6 +10,7 @@ participant CharacterDraw
 ' end note
 
 
+[-> main : onload="initialize();"
 activate main
 
 '' this is for layout
@@ -28,13 +29,12 @@ end
 EventListenerHandler -> EventListenerHandler :  clickHandler()\nkeyPressHandler()
 
 loop
-main -> PlayerKeyboardInputHandler : process()
+main -> PlayerInputProcessor : process()
 
-activate PlayerKeyboardInputHandler
+activate PlayerInputProcessor
 
-PlayerKeyboardInputHandler -> PlayerAction ++ : characterMove()\ncharacterAttack()
-
-PlayerAction -> PlayerAction : characterMoveRight()\ncharacterMoveLeft()\n......
+PlayerInputProcessor -> PlayerInputProcessor ++ : characterMove()\ncharacterAttack()
+PlayerInputProcessor -> PlayerAction ++ : characterMoveRight()\ncharacterMoveLeft()\n......
 
 
 '' this is for layout
@@ -42,10 +42,10 @@ PlayerAction -[hidden]> PlayerAction
 deactivate PlayerAction
 
 '' this is for layout
-PlayerAction -[hidden]-> PlayerKeyboardInputHandler
+PlayerAction -[hidden]-> PlayerInputProcessor
 
 
-deactivate PlayerKeyboardInputHandler
+deactivate PlayerInputProcessor
 
 main -> CharacterDraw ++ : draw()
 deactivate CharacterDraw
