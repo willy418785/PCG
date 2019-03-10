@@ -27,17 +27,20 @@ class PlayerInput{
     isProccessed : boolean
     initialize()
 }
-class PlayerKeyboardInputHandler{
+class PlayerInputProcessor{
     character : Character
     playerInput : PlayerInput
     process()
 }
+class PlayerAction{
+
+}
 '' relationship
-CharacterDraw --up-> Character
+CharacterDraw --up-> Character 
 EventListenerHandler --up-> PlayerInput
 EventListenerHandler --up-> DOM
-PlayerKeyboardInputHandler --up-> PlayerInput
-PlayerKeyboardInputHandler  --up-> Character
+PlayerInputProcessor --up-> PlayerInput
+PlayerInputProcessor  --up-> Character
 
 ' layout
 ' DOM -[hidden]- PlayerInput
@@ -50,9 +53,9 @@ PlayerKeyboardInputHandler  --up-> Character
 ' Character -[hidden]- DOM
 ' Character -[hidden]- DOM
 ' DOM -[hidden]- DOM
-' CharacterDraw -right[hidden]- PlayerKeyboardInputHandler
-' PlayerKeyboardInputHandler -left[hidden]- CharacterDraw
-' PlayerKeyboardInputHandler -left[hidden]- CharacterDraw
-' PlayerKeyboardInputHandler -left[hidden]- CharacterDraw
-' EventListenerHandler -[hidden]- PlayerKeyboardInputHandler
+' CharacterDraw -right[hidden]- PlayerInputProcessor
+' PlayerInputProcessor -left[hidden]- CharacterDraw
+' PlayerInputProcessor -left[hidden]- CharacterDraw
+' PlayerInputProcessor -left[hidden]- CharacterDraw
+' EventListenerHandler -[hidden]- PlayerInputProcessor
 @enduml
