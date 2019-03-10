@@ -1,0 +1,21 @@
+@startuml
+(*) --> if "Charater.IsAttackingUpward" then
+
+  if "is attack duration\n less than its maximum?" then
+	-> [false] " "
+  else
+	if "is player hit sth?" then
+	  -> [false] "activity 5"
+	else
+	  --> "call PlayerAction's method\n to change Character"
+   
+    note right: Set Charater.verticalSpeed to zero
+	endif
+  endif
+  
+else
+
+  ->[false] (*)
+  
+endif
+@enduml
