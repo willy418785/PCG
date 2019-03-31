@@ -4,12 +4,12 @@ class EventListenerHandler{
         this.playerInput = playerInput;
     }
     AddKeypressEventListener(){
-        var _this = this;
-        this.inputDocument.addEventListener("keypress", function(e){ _this.keyPressHandler(e); }, false); 
+        var self = this;
+        this.inputDocument.addEventListener("keypress", function(e){ self.keyPressHandler(e); }, false); 
     }
     AddClickEventListener(){
-        var _this = this;
-        this.inputDocument.addEventListener("mousedown", function(e){ _this.clickHandler(e); }, false); 
+        var self = this;
+        this.inputDocument.addEventListener("mousedown", function(e){ self.clickHandler(e); }, false); 
         if (this.inputDocument.addEventListener) { // IE >= 9; other browsers   
             this.inputDocument.addEventListener('contextmenu', function(e) {
                 e.preventDefault(); // reload 
