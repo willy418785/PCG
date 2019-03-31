@@ -1,0 +1,18 @@
+@startuml
+
+start
+if (加速度 + 加速度單元 <= 加速度上限) then (true)
+:速度 = 速度 + 加速度 + 加速度單元;
+else (false)
+:速度 = 速度 + 加速度上限;
+endif
+
+note 
+速度(Character.horizontalSpeed)
+加速度(Character.horizontalSpeedAcceleration)
+加速度單元(Character.rightSpeedAccelerationUnit)
+加速度上限(Character.rightSpeedAccelerationUpperBound)
+end note
+stop
+
+@enduml

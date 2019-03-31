@@ -7,16 +7,18 @@ class Character {
         TURN_AROUND_FRAME,
         x,
         y,
-        verticalSpeedAccelerationUnit,
-        horizontalSpeedAccelerationUnit,
-        verticalSpeadUpperBound,
-        verticalSpeadLowerBound,
-        horizontalSpeadUpperBound,
-        horizontalSpeadLowerBound,
-        verticalSpeedAccelerationUpperBound,
-        verticalSpeedAccelerationLowerBound,
-        horizontalSpeedAccelerationUpperBound,
-        horizontalSpeedAccelerationLowerBound) {
+        upperSpeedAccelerationUnit,
+        lowerSpeedAccelerationUnit,
+        rightSpeedAccelerationUnit,
+        leftySpeedAccelerationUnit,
+        upperSpeadUpperBound,
+        lowerSpeadUpperBound,
+        rightSpeadUpperBound,
+        leftySpeadUpperBound,
+        upperSpeedAccelerationUpperBound,
+        lowerSpeedAccelerationUpperBound,
+        rightSpeedAccelerationUpperBound,
+        leftySpeedAccelerationUpperBound) {
 
         this.verticalSpeed = 0; // positive direction is down
         this.verticalSpeedAcceleration = 0;
@@ -26,23 +28,26 @@ class Character {
         this.attackAnimationCount = 0;
         this.isTurningRight = true;
         this.isTurningAround = false;
-        this.x = x;
-        this.y = y;
-        this.verticalSpeedAccelerationUnit = verticalSpeedAccelerationUnit;
-        this.horizontalSpeedAccelerationUnit = horizontalSpeedAccelerationUnit;
+        
         this.gravityCoefficient = gravityCoefficient;
         this.characterWidth = characterWidth;
         this.characterHeight = characterHeight;
         this.ATTACK_ANIMATION_FRAME = ATTACK_ANIMATION_FRAME;
         this.TURN_AROUND_FRAME = TURN_AROUND_FRAME;
-        this.verticalSpeadUpperBound = verticalSpeadUpperBound;
-        this.verticalSpeadLowerBound = verticalSpeadLowerBound;
-        this.horizontalSpeadUpperBound = horizontalSpeadUpperBound;
-        this.horizontalSpeadLowerBound = horizontalSpeadLowerBound;
-        this.verticalSpeedAccelerationUpperBound = verticalSpeedAccelerationUpperBound;
-        this.verticalSpeedAccelerationLowerBound = verticalSpeedAccelerationLowerBound;
-        this.horizontalSpeedAccelerationUpperBound = horizontalSpeedAccelerationUpperBound;
-        this.horizontalSpeedAccelerationLowerBound = horizontalSpeedAccelerationLowerBound;
+        this.x = x;
+        this.y = y;
+        this.upperSpeedAccelerationUnit = upperSpeedAccelerationUnit;
+        this.lowerSpeedAccelerationUnit = lowerSpeedAccelerationUnit;
+        this.rightSpeedAccelerationUnit = rightSpeedAccelerationUnit;
+        this.leftySpeedAccelerationUnit = leftySpeedAccelerationUnit;
+        this.upperSpeadUpperBound = upperSpeadUpperBound;
+        this.lowerSpeadUpperBound = lowerSpeadUpperBound;
+        this.rightSpeadUpperBound = rightSpeadUpperBound;
+        this.leftySpeadUpperBound = leftySpeadUpperBound;
+        this.upperSpeedAccelerationUpperBound = upperSpeedAccelerationUpperBound;
+        this.lowerSpeedAccelerationUpperBound = lowerSpeedAccelerationUpperBound;
+        this.rightSpeedAccelerationUpperBound = rightSpeedAccelerationUpperBound;
+        this.leftySpeedAccelerationUpperBound = leftySpeedAccelerationUpperBound;
     }
 
     // addBuff(){
