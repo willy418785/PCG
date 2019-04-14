@@ -12,7 +12,16 @@ class PlayerInput{
         };
         this.isProccessed = false;
     }
-    initialize(){
-        this.isProccessed = false;
+    reset(){
+        this.playerInputList = {
+            'up':false, 
+            'right':false, 
+            'down':false, 
+            'left':false, 
+            'specialMovement':false, 
+            'attack1':false, 
+            'attack2':false,
+            'menu':false
+        };
     }
 }
