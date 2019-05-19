@@ -19,8 +19,9 @@ export class PlayerAction {
         if (!isMovingRight) {
             acceleration = -acceleration;
         }
-        character.horizontalSpeed += acceleration;
-        character.x += character.horizontalSpeed;
+        character.horizontalSpeedAcceleration = acceleration;
+        //character.horizontalSpeed += acceleration;
+        //character.x += character.horizontalSpeed;
     }
     characterMoveUp() {
 

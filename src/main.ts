@@ -10,6 +10,7 @@ var characterDraw;
 var playerInputListener;
 var playerInput;
 var playerInputProcessor;
+var player;
 var FPS = 60;
 var FRAME_INTERVAL = 1000 / FPS;
 function initialize(){
@@ -37,7 +38,7 @@ function initialize(){
     var rightSpeedAccelerationUpperBound = 20;
     var leftySpeedAccelerationUpperBound = 20;   
     var ctx = canvas.getContext("2d");
-    var player = new Character(
+    player = new Character(
         gravityCoefficient,
         characterWidth,
         characterHeight,
@@ -68,6 +69,7 @@ function initialize(){
 }
 function update() {
     playerInputProcessor.process();
+    player.process();
     characterDraw.draw();
 
     setTimeout(update, FRAME_INTERVAL);

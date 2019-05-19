@@ -75,7 +75,10 @@ export class Character {
             this.rightSpeedAccelerationUpperBound = rightSpeedAccelerationUpperBound;
             this.leftySpeedAccelerationUpperBound = leftySpeedAccelerationUpperBound;
     }
-
+    process(){
+        this.horizontalSpeed += this.horizontalSpeedAcceleration;
+        this.x += this.horizontalSpeed;
+    }
     // addBuff(){
     // }
     // removeBuff(){

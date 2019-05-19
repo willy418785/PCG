@@ -31,6 +31,10 @@ class Character {
         this.rightSpeedAccelerationUpperBound = rightSpeedAccelerationUpperBound;
         this.leftySpeedAccelerationUpperBound = leftySpeedAccelerationUpperBound;
     }
+    process() {
+        this.horizontalSpeed += this.horizontalSpeedAcceleration;
+        this.x += this.horizontalSpeed;
+    }
 }
 exports.Character = Character;
 
@@ -162,8 +166,9 @@ class PlayerAction {
         if (!isMovingRight) {
             acceleration = -acceleration;
         }
-        character.horizontalSpeed += acceleration;
-        character.x += character.horizontalSpeed;
+        character.horizontalSpeedAcceleration = acceleration;
+        //character.horizontalSpeed += acceleration;
+        //character.x += character.horizontalSpeed;
     }
     characterMoveUp() {
     }
@@ -257,7 +262,8 @@ var characterDraw;
 var playerInputListener;
 var playerInput;
 var playerInputProcessor;
-var FPS = 60;
+var player;
+var FPS = 20;
 var FRAME_INTERVAL = 1000 / FPS;
 function initialize() {
     var temp = document.getElementById("canvas");
@@ -265,8 +271,8 @@ function initialize() {
     canvas.width = 500;
     canvas.height = 400;
     var gravityCoefficient;
-    var characterWidth = 10;
-    var characterHeight = 10;
+    var characterWidth = 30;
+    var characterHeight = 30;
     var ATTACK_ANIMATION_FRAME;
     var TURN_AROUND_FRAME;
     var x = canvas.width / 2;
@@ -284,7 +290,7 @@ function initialize() {
     var rightSpeedAccelerationUpperBound = 20;
     var leftySpeedAccelerationUpperBound = 20;
     var ctx = canvas.getContext("2d");
-    var player = new Character_1.Character(gravityCoefficient, characterWidth, characterHeight, ATTACK_ANIMATION_FRAME, TURN_AROUND_FRAME, x, y, upperSpeedAccelerationUnit, lowerSpeedAccelerationUnit, rightSpeedAccelerationUnit, leftySpeedAccelerationUnit, upperSpeadUpperBound, lowerSpeadUpperBound, rightSpeadUpperBound, leftySpeadUpperBound, upperSpeedAccelerationUpperBound, lowerSpeedAccelerationUpperBound, rightSpeedAccelerationUpperBound, leftySpeedAccelerationUpperBound);
+    player = new Character_1.Character(gravityCoefficient, characterWidth, characterHeight, ATTACK_ANIMATION_FRAME, TURN_AROUND_FRAME, x, y, upperSpeedAccelerationUnit, lowerSpeedAccelerationUnit, rightSpeedAccelerationUnit, leftySpeedAccelerationUnit, upperSpeadUpperBound, lowerSpeadUpperBound, rightSpeadUpperBound, leftySpeadUpperBound, upperSpeedAccelerationUpperBound, lowerSpeedAccelerationUpperBound, rightSpeedAccelerationUpperBound, leftySpeedAccelerationUpperBound);
     characterDraw = new CharacterDraw_1.CharacterDraw(player, canvas);
     characterDraw.draw();
     playerInput = new PlayerInput_1.PlayerInput();
@@ -296,6 +302,7 @@ function initialize() {
 }
 function update() {
     playerInputProcessor.process();
+    player.process();
     characterDraw.draw();
     setTimeout(update, FRAME_INTERVAL);
 }
