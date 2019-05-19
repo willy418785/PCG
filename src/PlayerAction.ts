@@ -1,4 +1,4 @@
-class PlayerAction {
+export class PlayerAction {
     constructor() {}
     characterMoveSideway(character, isMovingRight) {
         var accelerationUnit =

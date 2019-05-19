@@ -1,34 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 class Character {
-    constructor(
-        gravityCoefficient,
-        characterWidth,
-        characterHeight,
-        ATTACK_ANIMATION_FRAME,
-        TURN_AROUND_FRAME,
-        x,
-        y,
-        upperSpeedAccelerationUnit,
-        lowerSpeedAccelerationUnit,
-        rightSpeedAccelerationUnit,
-        leftySpeedAccelerationUnit,
-        upperSpeadUpperBound,
-        lowerSpeadUpperBound,
-        rightSpeadUpperBound,
-        leftySpeadUpperBound,
-        upperSpeedAccelerationUpperBound,
-        lowerSpeedAccelerationUpperBound,
-        rightSpeedAccelerationUpperBound,
-        leftySpeedAccelerationUpperBound) {
-
-        this.verticalSpeed = 0; // positive direction is down
+    constructor(gravityCoefficient, characterWidth, characterHeight, ATTACK_ANIMATION_FRAME, TURN_AROUND_FRAME, x, y, upperSpeedAccelerationUnit, lowerSpeedAccelerationUnit, rightSpeedAccelerationUnit, leftySpeedAccelerationUnit, upperSpeadUpperBound, lowerSpeadUpperBound, rightSpeadUpperBound, leftySpeadUpperBound, upperSpeedAccelerationUpperBound, lowerSpeedAccelerationUpperBound, rightSpeedAccelerationUpperBound, leftySpeedAccelerationUpperBound) {
+        this.verticalSpeed = 0;
         this.verticalSpeedAcceleration = 0;
-        this.horizontalSpeed = 0; // positive direction is right
+        this.horizontalSpeed = 0;
         this.horizontalSpeedAcceleration = 0;
-        this.turnAroundAnimationCount = 0
+        this.turnAroundAnimationCount = 0;
         this.attackAnimationCount = 0;
         this.isTurningRight = true;
         this.isTurningAround = false;
-        
         this.gravityCoefficient = gravityCoefficient;
         this.characterWidth = characterWidth;
         this.characterHeight = characterHeight;
@@ -49,9 +30,5 @@ class Character {
         this.rightSpeedAccelerationUpperBound = rightSpeedAccelerationUpperBound;
         this.leftySpeedAccelerationUpperBound = leftySpeedAccelerationUpperBound;
     }
-
-    // addBuff(){
-    // }
-    // removeBuff(){
-    // }
 }
+exports.Character = Character;

@@ -1,4 +1,10 @@
-class PlayerInputProcessor {
+import {PlayerInput} from './PlayerInput';
+import {PlayerAction} from './PlayerAction';
+import { Character } from './Character';
+export class PlayerInputProcessor {
+    character: Character;
+    playerInput: PlayerInput;
+    playerAction: PlayerAction;
     constructor(character, playerInput) {
         this.character = character;
         this.playerInput = playerInput;
@@ -9,19 +15,18 @@ class PlayerInputProcessor {
             return;
         }
 
-        if (playerInput.playerInputList['right'] &&
-            playerInput.playerInputList['left']) {
+        if (this.playerInput.playerInputList['right'] &&
+            this.playerInput.playerInputList['left']) {
             return;
         }
-        if(playerInput.playerInputList['right']){
+        if(this.playerInput.playerInputList['right']){
             this.characterMove(true);
             
         }
-        if(playerInput.playerInputList['left']){
+        if(this.playerInput.playerInputList['left']){
             this.characterMove(false);
         }
         this.playerInput.reset();
-        this.playerInput.isProccessed = true;
     }
     characterMove(isMovingRight) {
         this.playerAction.characterMoveSideway(this.character, isMovingRight);

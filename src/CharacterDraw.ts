@@ -1,4 +1,17 @@
-class CharacterDraw{
+import { Character } from "./Character";
+
+export class CharacterDraw{
+    character: Character;
+    canvas: HTMLCanvasElement;
+    ctx;
+    pLTX: number;
+    pLTY: number;
+    pRTX: number;
+    pRTY: number;
+    pRBX: number;
+    pRBY: number;
+    pLBX: number;
+    pLBY: number;
     constructor(character, canvas) {
         this.character = character;
         this.canvas = canvas;
