@@ -17,3 +17,6 @@
   - [x] 把程式碼改成typescript
   - [x] 增加對角色位置與地圖邊界的檢查
   - [x] 實現PlayerInputProcessor.characterMove
+- 20190526
+  - [x] 新增一個場景類別
+  - [x] 新增一個「接收場景物件跟角色物件，以更新角色物件」的類別
