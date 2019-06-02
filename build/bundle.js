@@ -265,8 +265,8 @@ function initialize() {
     canvas.width = 500;
     canvas.height = 400;
     var gravityCoefficient;
-    var characterWidth = 10;
-    var characterHeight = 10;
+    var characterWidth = 30;
+    var characterHeight = 30;
     var ATTACK_ANIMATION_FRAME;
     var TURN_AROUND_FRAME;
     var x = canvas.width / 2;
