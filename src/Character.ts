@@ -1,4 +1,8 @@
-export class Character {
+import { CollisionContours } from "./CollisionContours";
+import { Point } from "./Point";
+import { ICharacter } from "./Interface/Character.interface";
+
+export class Character implements ICharacter {
     verticalSpeed: number; // positive direction is down
     verticalSpeedAcceleration: number;
     horizontalSpeed: number;// positive direction is right
@@ -26,6 +30,8 @@ export class Character {
     lowerSpeedAccelerationUpperBound: number;
     rightSpeedAccelerationUpperBound: number;
     leftySpeedAccelerationUpperBound: number;
+
+    charaterContours:CollisionContours;
     constructor(
         gravityCoefficient,
         characterWidth,
@@ -55,6 +61,8 @@ export class Character {
         this.isTurningRight = true;
         this.isTurningAround = false;
 
+        this.intitializeContours();
+            
         this.gravityCoefficient = gravityCoefficient;
         this.characterWidth = characterWidth;
         this.characterHeight = characterHeight;
@@ -85,6 +93,9 @@ export class Character {
             this.horizontalSpeed = this.horizontalSpeed >= this.rightSpeadUpperBound ?
                 this.rightSpeadUpperBound : this.horizontalSpeed;
         }
+    }
+    intitializeContours(){
+
     }
     // addBuff(){
     // }
