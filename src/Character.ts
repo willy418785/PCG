@@ -2,36 +2,36 @@ import { CollisionContours } from "./CollisionContours";
 import { Point } from "./Point";
 import { ICharacter } from "./Interface/Character.interface";
 
-export class Character implements ICharacter {
-    verticalSpeed: number; // positive direction is down
-    verticalSpeedAcceleration: number;
-    horizontalSpeed: number;// positive direction is right
-    horizontalSpeedAcceleration: number;
-    turnAroundAnimationCount: number;
-    attackAnimationCount: number;
-    isTurningRight: boolean;
-    isTurningAround: boolean;
-    gravityCoefficient: number;
-    characterWidth: number;
-    characterHeight: number;
-    ATTACK_ANIMATION_FRAME: number;
-    TURN_AROUND_FRAME: number;
-    x: number;
-    y: number;
-    upperSpeedAccelerationUnit: number;
-    lowerSpeedAccelerationUnit: number;
-    rightSpeedAccelerationUnit: number;
-    leftySpeedAccelerationUnit: number;
-    upperSpeadUpperBound: number;
-    lowerSpeadUpperBound: number;
-    rightSpeadUpperBound: number;
-    leftySpeadUpperBound: number;
-    upperSpeedAccelerationUpperBound: number;
-    lowerSpeedAccelerationUpperBound: number;
-    rightSpeedAccelerationUpperBound: number;
-    leftySpeedAccelerationUpperBound: number;
+export abstract class Character implements ICharacter {
+    public verticalSpeed: number; // positive direction is down
+    public verticalSpeedAcceleration: number;
+    public horizontalSpeed: number;// positive direction is right
+    public horizontalSpeedAcceleration: number;
+    public turnAroundAnimationCount: number;
+    public attackAnimationCount: number;
+    public isTurningRight: boolean;
+    public isTurningAround: boolean;
+    public gravityCoefficient: number;
+    public characterWidth: number;
+    public characterHeight: number;
+    readonly ATTACK_ANIMATION_FRAME: number;
+    readonly TURN_AROUND_FRAME: number;
+    public x: number;
+    public y: number;
+    public upperSpeedAccelerationUnit: number;
+    public lowerSpeedAccelerationUnit: number;
+    public rightSpeedAccelerationUnit: number;
+    public leftySpeedAccelerationUnit: number;
+    public upperSpeadUpperBound: number;
+    public lowerSpeadUpperBound: number;
+    public rightSpeadUpperBound: number;
+    public leftySpeadUpperBound: number;
+    public upperSpeedAccelerationUpperBound: number;
+    public lowerSpeedAccelerationUpperBound: number;
+    public rightSpeedAccelerationUpperBound: number;
+    public leftySpeedAccelerationUpperBound: number;
+    public charaterContours: CollisionContours;
 
-    charaterContours:CollisionContours;
     constructor(
         gravityCoefficient,
         characterWidth,
@@ -83,7 +83,7 @@ export class Character implements ICharacter {
         this.rightSpeedAccelerationUpperBound = rightSpeedAccelerationUpperBound;
         this.leftySpeedAccelerationUpperBound = leftySpeedAccelerationUpperBound;
     }
-    process() {
+    process() : void {
         this.horizontalSpeed += this.horizontalSpeedAcceleration;
         if (this.horizontalSpeed <= 0) {
             this.horizontalSpeed = this.horizontalSpeed <= -(this.leftySpeadUpperBound) ?
@@ -94,9 +94,7 @@ export class Character implements ICharacter {
                 this.rightSpeadUpperBound : this.horizontalSpeed;
         }
     }
-    intitializeContours(){
-
-    }
+    abstract intitializeContours() : void;
     // addBuff(){
     // }
     // removeBuff(){
