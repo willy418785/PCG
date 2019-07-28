@@ -21,8 +21,10 @@
   - [x] 新增一個場景類別
   - [x] 新增一個「接收場景物件跟角色物件，以更新角色物件」的類別
 - 20190630
-  - [ ] 完成 `pointsFormula Array<func(Skeleton): Points>`
+  - [x] 完成 `pointsFormula Array<func(Skeleton): Points>`
   - [ ] 完成 LevelBlock
-  - [ ] 完成各種Contours
+  - [x] 完成各種Contours
   - [ ] 完成 Level
   - [ ] 完成 ManagerForLevelAndCharacter
+- 20190728
+  - [ ] 測試 pointsFormula
