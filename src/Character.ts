@@ -22,10 +22,10 @@ export abstract class Character implements ICharacter {
     public lowerSpeedAccelerationUnit: number;
     public rightSpeedAccelerationUnit: number;
     public leftySpeedAccelerationUnit: number;
-    public upperSpeadUpperBound: number;
-    public lowerSpeadUpperBound: number;
-    public rightSpeadUpperBound: number;
-    public leftySpeadUpperBound: number;
+    public upperSpeedUpperBound: number;
+    public lowerSpeedUpperBound: number;
+    public rightSpeedUpperBound: number;
+    public leftySpeedUpperBound: number;
     public upperSpeedAccelerationUpperBound: number;
     public lowerSpeedAccelerationUpperBound: number;
     public rightSpeedAccelerationUpperBound: number;
@@ -44,10 +44,10 @@ export abstract class Character implements ICharacter {
         lowerSpeedAccelerationUnit,
         rightSpeedAccelerationUnit,
         leftySpeedAccelerationUnit,
-        upperSpeadUpperBound,
-        lowerSpeadUpperBound,
-        rightSpeadUpperBound,
-        leftySpeadUpperBound,
+        upperSpeedUpperBound,
+        lowerSpeedUpperBound,
+        rightSpeedUpperBound,
+        leftySpeedUpperBound,
         upperSpeedAccelerationUpperBound,
         lowerSpeedAccelerationUpperBound,
         rightSpeedAccelerationUpperBound,
@@ -74,10 +74,10 @@ export abstract class Character implements ICharacter {
         this.lowerSpeedAccelerationUnit = lowerSpeedAccelerationUnit;
         this.rightSpeedAccelerationUnit = rightSpeedAccelerationUnit;
         this.leftySpeedAccelerationUnit = leftySpeedAccelerationUnit;
-        this.upperSpeadUpperBound = upperSpeadUpperBound;
-        this.lowerSpeadUpperBound = lowerSpeadUpperBound;
-        this.rightSpeadUpperBound = rightSpeadUpperBound;
-        this.leftySpeadUpperBound = leftySpeadUpperBound;
+        this.upperSpeedUpperBound = upperSpeedUpperBound;
+        this.lowerSpeedUpperBound = lowerSpeedUpperBound;
+        this.rightSpeedUpperBound = rightSpeedUpperBound;
+        this.leftySpeedUpperBound = leftySpeedUpperBound;
         this.upperSpeedAccelerationUpperBound = upperSpeedAccelerationUpperBound;
         this.lowerSpeedAccelerationUpperBound = lowerSpeedAccelerationUpperBound;
         this.rightSpeedAccelerationUpperBound = rightSpeedAccelerationUpperBound;
@@ -86,12 +86,12 @@ export abstract class Character implements ICharacter {
     process() : void {
         this.horizontalSpeed += this.horizontalSpeedAcceleration;
         if (this.horizontalSpeed <= 0) {
-            this.horizontalSpeed = this.horizontalSpeed <= -(this.leftySpeadUpperBound) ?
-                -(this.leftySpeadUpperBound) : this.horizontalSpeed;
+            this.horizontalSpeed = this.horizontalSpeed <= -(this.leftySpeedUpperBound) ?
+                -(this.leftySpeedUpperBound) : this.horizontalSpeed;
         }
         else {
-            this.horizontalSpeed = this.horizontalSpeed >= this.rightSpeadUpperBound ?
-                this.rightSpeadUpperBound : this.horizontalSpeed;
+            this.horizontalSpeed = this.horizontalSpeed >= this.rightSpeedUpperBound ?
+                this.rightSpeedUpperBound : this.horizontalSpeed;
         }
     }
     abstract intitializeContours() : void;

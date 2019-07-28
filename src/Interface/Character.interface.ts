@@ -18,10 +18,10 @@ export interface ICharacter {
     lowerSpeedAccelerationUnit: number;
     rightSpeedAccelerationUnit: number;
     leftySpeedAccelerationUnit: number;
-    upperSpeadUpperBound: number;
-    lowerSpeadUpperBound: number;
-    rightSpeadUpperBound: number;
-    leftySpeadUpperBound: number;
+    upperSpeedUpperBound: number;
+    lowerSpeedUpperBound: number;
+    rightSpeedUpperBound: number;
+    leftySpeedUpperBound: number;
     upperSpeedAccelerationUpperBound: number;
     lowerSpeedAccelerationUpperBound: number;
     rightSpeedAccelerationUpperBound: number;
