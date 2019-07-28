@@ -1,6 +1,7 @@
 import { CollisionContours } from "./CollisionContours";
 import { Point } from "./Point";
 import { ICharacter } from "./Interface/Character.interface";
+import { ContourSkeleton } from "./ContourSkeleton";
 
 export abstract class Character implements ICharacter {
     public verticalSpeed: number; // positive direction is down
@@ -30,28 +31,28 @@ export abstract class Character implements ICharacter {
     public lowerSpeedAccelerationUpperBound: number;
     public rightSpeedAccelerationUpperBound: number;
     public leftySpeedAccelerationUpperBound: number;
-    public charaterContours: CollisionContours;
+    public skeleton: ContourSkeleton;
 
     constructor(
-        gravityCoefficient,
-        characterWidth,
-        characterHeight,
-        ATTACK_ANIMATION_FRAME,
-        TURN_AROUND_FRAME,
-        x,
-        y,
-        upperSpeedAccelerationUnit,
-        lowerSpeedAccelerationUnit,
-        rightSpeedAccelerationUnit,
-        leftySpeedAccelerationUnit,
-        upperSpeedUpperBound,
-        lowerSpeedUpperBound,
-        rightSpeedUpperBound,
-        leftySpeedUpperBound,
-        upperSpeedAccelerationUpperBound,
-        lowerSpeedAccelerationUpperBound,
-        rightSpeedAccelerationUpperBound,
-        leftySpeedAccelerationUpperBound) {
+        gravityCoefficient: number = 1,
+        characterWidth: number = 10,
+        characterHeight: number = 10,
+        ATTACK_ANIMATION_FRAME: number = 30,
+        TURN_AROUND_FRAME: number = 15,
+        x: number = 0,
+        y: number = 0,
+        upperSpeedAccelerationUnit: number = 1,
+        lowerSpeedAccelerationUnit: number = 1,
+        rightSpeedAccelerationUnit: number = 1,
+        leftySpeedAccelerationUnit: number = 1,
+        upperSpeedUpperBound: number = 10,
+        lowerSpeedUpperBound: number = 10,
+        rightSpeedUpperBound: number = 10,
+        leftySpeedUpperBound: number = 10,
+        upperSpeedAccelerationUpperBound: number = 5,
+        lowerSpeedAccelerationUpperBound: number = 5,
+        rightSpeedAccelerationUpperBound: number = 5,
+        leftySpeedAccelerationUpperBound: number = 5) {
         this.verticalSpeed = 0;
         this.verticalSpeedAcceleration = 0;
         this.horizontalSpeed = 0;
@@ -62,14 +63,14 @@ export abstract class Character implements ICharacter {
         this.isTurningAround = false;
 
         this.intitializeContours();
+        this.skeleton.referencePoint.x = x;
+        this.skeleton.referencePoint.y = y;
             
         this.gravityCoefficient = gravityCoefficient;
         this.characterWidth = characterWidth;
         this.characterHeight = characterHeight;
         this.ATTACK_ANIMATION_FRAME = ATTACK_ANIMATION_FRAME;
         this.TURN_AROUND_FRAME = TURN_AROUND_FRAME;
-        this.x = x;
-        this.y = y;
         this.upperSpeedAccelerationUnit = upperSpeedAccelerationUnit;
         this.lowerSpeedAccelerationUnit = lowerSpeedAccelerationUnit;
         this.rightSpeedAccelerationUnit = rightSpeedAccelerationUnit;
