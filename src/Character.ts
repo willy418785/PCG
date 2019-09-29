@@ -4,6 +4,20 @@ import { ICharacter } from "./Interface/Character.interface";
 import { ContourSkeleton } from "./ContourSkeleton";
 
 export abstract class Character implements ICharacter {
+    public get x(): number{
+        return this.skeleton.referencePoint.x;
+    }
+    public set x(value:number){
+        this.skeleton.referencePoint.x = value;
+    }
+
+    public get y(): number{
+        return this.skeleton.referencePoint.y;
+    }
+    public set y(value:number){
+        this.skeleton.referencePoint.y = value;
+    }
+
     public verticalSpeed: number; // positive direction is down
     public verticalSpeedAcceleration: number;
     public horizontalSpeed: number;// positive direction is right
@@ -17,8 +31,6 @@ export abstract class Character implements ICharacter {
     public characterHeight: number;
     readonly ATTACK_ANIMATION_FRAME: number;
     readonly TURN_AROUND_FRAME: number;
-    public x: number;
-    public y: number;
     public upperSpeedAccelerationUnit: number;
     public lowerSpeedAccelerationUnit: number;
     public rightSpeedAccelerationUnit: number;
@@ -53,6 +65,7 @@ export abstract class Character implements ICharacter {
         lowerSpeedAccelerationUpperBound: number = 5,
         rightSpeedAccelerationUpperBound: number = 5,
         leftySpeedAccelerationUpperBound: number = 5) {
+            
         this.verticalSpeed = 0;
         this.verticalSpeedAcceleration = 0;
         this.horizontalSpeed = 0;
@@ -63,9 +76,9 @@ export abstract class Character implements ICharacter {
         this.isTurningAround = false;
 
         this.intitializeContours();
-        this.skeleton.referencePoint.x = x;
-        this.skeleton.referencePoint.y = y;
-            
+        this.x = x;
+        this.y = y;
+
         this.gravityCoefficient = gravityCoefficient;
         this.characterWidth = characterWidth;
         this.characterHeight = characterHeight;
