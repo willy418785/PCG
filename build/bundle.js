@@ -2,7 +2,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class Character {
-    constructor(gravityCoefficient, characterWidth, characterHeight, ATTACK_ANIMATION_FRAME, TURN_AROUND_FRAME, x, y, upperSpeedAccelerationUnit, lowerSpeedAccelerationUnit, rightSpeedAccelerationUnit, leftySpeedAccelerationUnit, upperSpeadUpperBound, lowerSpeadUpperBound, rightSpeadUpperBound, leftySpeadUpperBound, upperSpeedAccelerationUpperBound, lowerSpeedAccelerationUpperBound, rightSpeedAccelerationUpperBound, leftySpeedAccelerationUpperBound) {
+    get x() {
+        return this.skeleton.referencePoint.x;
+    }
+    set x(value) {
+        this.skeleton.referencePoint.x = value;
+    }
+    get y() {
+        return this.skeleton.referencePoint.y;
+    }
+    set y(value) {
+        this.skeleton.referencePoint.y = value;
+    }
+    constructor(gravityCoefficient = 1, characterWidth = 10, characterHeight = 10, ATTACK_ANIMATION_FRAME = 30, TURN_AROUND_FRAME = 15, x = 0, y = 0, upperSpeedAccelerationUnit = 1, lowerSpeedAccelerationUnit = 1, rightSpeedAccelerationUnit = 1, leftySpeedAccelerationUnit = 1, upperSpeedUpperBound = 10, lowerSpeedUpperBound = 10, rightSpeedUpperBound = 10, leftySpeedUpperBound = 10, upperSpeedAccelerationUpperBound = 5, lowerSpeedAccelerationUpperBound = 5, rightSpeedAccelerationUpperBound = 5, leftySpeedAccelerationUpperBound = 5) {
         this.verticalSpeed = 0;
         this.verticalSpeedAcceleration = 0;
         this.horizontalSpeed = 0;
@@ -11,21 +23,22 @@ class Character {
         this.attackAnimationCount = 0;
         this.isTurningRight = true;
         this.isTurningAround = false;
+        this.intitializeContours();
+        this.x = x;
+        this.y = y;
         this.gravityCoefficient = gravityCoefficient;
         this.characterWidth = characterWidth;
         this.characterHeight = characterHeight;
         this.ATTACK_ANIMATION_FRAME = ATTACK_ANIMATION_FRAME;
         this.TURN_AROUND_FRAME = TURN_AROUND_FRAME;
-        this.x = x;
-        this.y = y;
         this.upperSpeedAccelerationUnit = upperSpeedAccelerationUnit;
         this.lowerSpeedAccelerationUnit = lowerSpeedAccelerationUnit;
         this.rightSpeedAccelerationUnit = rightSpeedAccelerationUnit;
         this.leftySpeedAccelerationUnit = leftySpeedAccelerationUnit;
-        this.upperSpeadUpperBound = upperSpeadUpperBound;
-        this.lowerSpeadUpperBound = lowerSpeadUpperBound;
-        this.rightSpeadUpperBound = rightSpeadUpperBound;
-        this.leftySpeadUpperBound = leftySpeadUpperBound;
+        this.upperSpeedUpperBound = upperSpeedUpperBound;
+        this.lowerSpeedUpperBound = lowerSpeedUpperBound;
+        this.rightSpeedUpperBound = rightSpeedUpperBound;
+        this.leftySpeedUpperBound = leftySpeedUpperBound;
         this.upperSpeedAccelerationUpperBound = upperSpeedAccelerationUpperBound;
         this.lowerSpeedAccelerationUpperBound = lowerSpeedAccelerationUpperBound;
         this.rightSpeedAccelerationUpperBound = rightSpeedAccelerationUpperBound;
@@ -34,12 +47,12 @@ class Character {
     process() {
         this.horizontalSpeed += this.horizontalSpeedAcceleration;
         if (this.horizontalSpeed <= 0) {
-            this.horizontalSpeed = this.horizontalSpeed <= -(this.leftySpeadUpperBound) ?
-                -(this.leftySpeadUpperBound) : this.horizontalSpeed;
+            this.horizontalSpeed = this.horizontalSpeed <= -(this.leftySpeedUpperBound) ?
+                -(this.leftySpeedUpperBound) : this.horizontalSpeed;
         }
         else {
-            this.horizontalSpeed = this.horizontalSpeed >= this.rightSpeadUpperBound ?
-                this.rightSpeadUpperBound : this.horizontalSpeed;
+            this.horizontalSpeed = this.horizontalSpeed >= this.rightSpeedUpperBound ?
+                this.rightSpeedUpperBound : this.horizontalSpeed;
         }
     }
 }
@@ -53,41 +66,65 @@ class CharacterDraw {
         this.character = character;
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
-        this.pLTX = 0;
-        this.pLTY = 0;
-        this.pRTX = 0;
-        this.pRTY = 0;
-        this.pRBX = 0;
-        this.pRBY = 0;
-        this.pLBX = 0;
-        this.pLBY = 0;
-    }
-    formBasicShape() {
-        this.pLTX = this.character.x;
-        this.pLTY = this.character.y - this.character.characterHeight;
-        this.pRTX = this.character.x + this.character.characterWidth;
-        this.pRTY = this.character.y - this.character.characterHeight;
-        this.pRBX = this.character.x + this.character.characterWidth;
-        this.pRBY = this.character.y;
-        this.pLBX = this.character.x;
-        this.pLBY = this.character.y;
     }
     draw() {
-        this.formBasicShape();
         this.canvas.width = this.canvas.width;
         this.ctx.strokeStyle = "black";
         this.ctx.lineWidth = 1;
-        this.ctx.lineTo(this.pLTX, this.pLTY);
-        this.ctx.lineTo(this.pRTX, this.pRTY);
-        this.ctx.lineTo(this.pRBX, this.pRBY);
-        this.ctx.lineTo(this.pLBX, this.pLBY);
-        this.ctx.lineTo(this.pLTX, this.pLTY);
+        var tmp = this.character.collisionContour.getSegments();
+        this.ctx.lineTo(tmp[0][0].x, tmp[0][0].y);
+        this.ctx.lineTo(tmp[1][0].x, tmp[1][0].y);
+        this.ctx.lineTo(tmp[2][0].x, tmp[2][0].y);
+        this.ctx.lineTo(tmp[3][0].x, tmp[3][0].y);
+        this.ctx.lineTo(tmp[0][0].x, tmp[0][0].y);
         this.ctx.stroke();
     }
 }
 exports.CharacterDraw = CharacterDraw;
 
 },{}],3:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class CollisionContours {
+    constructor(skeleton, formulas) {
+        this.pointFormulas = formulas;
+        this.skeleton = skeleton;
+    }
+    getSegments() {
+        let segments = new Array();
+        for (let index = 0; index < this.pointFormulas.length; index++) {
+            let lastIndex = this.pointFormulas.length - 1;
+            if (index != lastIndex) {
+                segments.push([
+                    this.pointFormulas[index](this.skeleton),
+                    this.pointFormulas[index + 1](this.skeleton)
+                ]);
+            }
+            else {
+                segments.push([
+                    this.pointFormulas[lastIndex](this.skeleton),
+                    this.pointFormulas[0](this.skeleton)
+                ]);
+            }
+        }
+        return segments;
+    }
+}
+exports.CollisionContours = CollisionContours;
+
+},{}],4:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Point_1 = require("./Point");
+class ContourSkeleton {
+    constructor(points, referencePoint = new Point_1.Point(0, 0)) {
+        this.points = points;
+        this.referencePoint = referencePoint;
+    }
+}
+exports.ContourSkeleton = ContourSkeleton;
+
+},{"./Point":11}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class EventListenerHandler {
@@ -152,7 +189,66 @@ class EventListenerHandler {
 }
 exports.EventListenerHandler = EventListenerHandler;
 
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class ManagerForLevelAndCharacter {
+    constructor() {
+        this.characterList = new Array();
+    }
+    addCharacter(character) {
+        this.characterList.push(character);
+    }
+    setLevel(level) {
+        this.level = level;
+    }
+    process() {
+        this.characterList.forEach(element => {
+            element.process();
+            let tmpPositionX = element.x + element.horizontalSpeed;
+            let tmpPositionY = element.y + element.verticalSpeed;
+            element.x = tmpPositionX;
+            element.y = tmpPositionY;
+        });
+    }
+}
+exports.ManagerForLevelAndCharacter = ManagerForLevelAndCharacter;
+
+},{}],7:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+// import { CollisionContours } from "./CollisionContours";
+const Point_1 = require("./Point");
+// import { ICharacter } from "./Interface/Character.interface";
+const ContourSkeleton_1 = require("./ContourSkeleton");
+const Character_1 = require("./Character");
+const CollisionContours_1 = require("./CollisionContours");
+class Player extends Character_1.Character {
+    intitializeContours() {
+        /// setup skeleton
+        var points = new Array();
+        points.push(new Point_1.Point(-10, -10), new Point_1.Point(10, -10), new Point_1.Point(10, 10), new Point_1.Point(-10, 10));
+        this.skeleton = new ContourSkeleton_1.ContourSkeleton(points);
+        /// setup CollisionContours
+        var formulas = new Array();
+        formulas.push((skeleton) => {
+            return Point_1.Point.add(skeleton.points[0], skeleton.referencePoint);
+        });
+        formulas.push((skeleton) => {
+            return Point_1.Point.add(skeleton.points[1], skeleton.referencePoint);
+        });
+        formulas.push((skeleton) => {
+            return Point_1.Point.add(skeleton.points[2], skeleton.referencePoint);
+        });
+        formulas.push((skeleton) => {
+            return Point_1.Point.add(skeleton.points[3], skeleton.referencePoint);
+        });
+        this.collisionContour = new CollisionContours_1.CollisionContours(this.skeleton, formulas);
+    }
+}
+exports.Player = Player;
+
+},{"./Character":1,"./CollisionContours":3,"./ContourSkeleton":4,"./Point":11}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class PlayerAction {
@@ -190,7 +286,7 @@ class PlayerAction {
 }
 exports.PlayerAction = PlayerAction;
 
-},{}],5:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class PlayerInput {
@@ -221,7 +317,7 @@ class PlayerInput {
 }
 exports.PlayerInput = PlayerInput;
 
-},{}],6:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const PlayerAction_1 = require("./PlayerAction");
@@ -257,14 +353,32 @@ class PlayerInputProcessor {
 }
 exports.PlayerInputProcessor = PlayerInputProcessor;
 
-},{"./PlayerAction":4}],7:[function(require,module,exports){
+},{"./PlayerAction":8}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Character_1 = require("./Character");
+class Point {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+    static add(p1, p2) {
+        var p = new Point(0, 0);
+        p.x = p1.x + p2.x;
+        p.y = p1.y + p2.y;
+        return p;
+    }
+}
+exports.Point = Point;
+
+},{}],12:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const CharacterDraw_1 = require("./CharacterDraw");
 const PlayerInput_1 = require("./PlayerInput");
 const EventListenerHandler_1 = require("./EventListenerHandler");
 const PlayerInputProcessor_1 = require("./PlayerInputProcessor");
+const Player_1 = require("./Player");
+const ManagerForLevelAndCharacter_1 = require("./ManagerForLevelAndCharacter");
 var characterDraw;
 var playerInputListener;
 var playerInput;
@@ -272,6 +386,7 @@ var playerInputProcessor;
 var player;
 var FPS = 60;
 var FRAME_INTERVAL = 1000 / FPS;
+var levelManager;
 function initialize() {
     var temp = document.getElementById("canvas");
     var canvas = temp;
@@ -297,7 +412,7 @@ function initialize() {
     var rightSpeedAccelerationUpperBound = 20;
     var leftySpeedAccelerationUpperBound = 20;
     var ctx = canvas.getContext("2d");
-    player = new Character_1.Character(gravityCoefficient, characterWidth, characterHeight, ATTACK_ANIMATION_FRAME, TURN_AROUND_FRAME, x, y, upperSpeedAccelerationUnit, lowerSpeedAccelerationUnit, rightSpeedAccelerationUnit, leftySpeedAccelerationUnit, upperSpeadUpperBound, lowerSpeadUpperBound, rightSpeadUpperBound, leftySpeadUpperBound, upperSpeedAccelerationUpperBound, lowerSpeedAccelerationUpperBound, rightSpeedAccelerationUpperBound, leftySpeedAccelerationUpperBound);
+    player = new Player_1.Player(gravityCoefficient, characterWidth, characterHeight, ATTACK_ANIMATION_FRAME, TURN_AROUND_FRAME, x, y, upperSpeedAccelerationUnit, lowerSpeedAccelerationUnit, rightSpeedAccelerationUnit, leftySpeedAccelerationUnit, upperSpeadUpperBound, lowerSpeadUpperBound, rightSpeadUpperBound, leftySpeadUpperBound, upperSpeedAccelerationUpperBound, lowerSpeedAccelerationUpperBound, rightSpeedAccelerationUpperBound, leftySpeedAccelerationUpperBound);
     characterDraw = new CharacterDraw_1.CharacterDraw(player, canvas);
     characterDraw.draw();
     playerInput = new PlayerInput_1.PlayerInput();
@@ -305,14 +420,16 @@ function initialize() {
     playerInputListener.AddKeypressEventListener();
     playerInputListener.AddClickEventListener();
     playerInputProcessor = new PlayerInputProcessor_1.PlayerInputProcessor(player, playerInput);
+    levelManager = new ManagerForLevelAndCharacter_1.ManagerForLevelAndCharacter();
+    levelManager.addCharacter(player);
     setTimeout(update, FRAME_INTERVAL);
 }
 function update() {
     playerInputProcessor.process();
-    player.process();
     characterDraw.draw();
+    levelManager.process();
     setTimeout(update, FRAME_INTERVAL);
 }
 initialize();
 
-},{"./Character":1,"./CharacterDraw":2,"./EventListenerHandler":3,"./PlayerInput":5,"./PlayerInputProcessor":6}]},{},[7]);
+},{"./CharacterDraw":2,"./EventListenerHandler":5,"./ManagerForLevelAndCharacter":6,"./Player":7,"./PlayerInput":9,"./PlayerInputProcessor":10}]},{},[12]);
