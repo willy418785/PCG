@@ -3,7 +3,7 @@ import { Character } from "./Character";
 
 export class ManagerForLevelAndCharacter {
     private level: Level;
-    private characterList: Array<Character>;
+    private characterList: Array<Character> = new Array<Character>();
     constructor() {
 
     }
@@ -19,6 +19,9 @@ export class ManagerForLevelAndCharacter {
             let tmpPositionX: number = element.x + element.horizontalSpeed;
             let tmpPositionY: number = element.y + element.verticalSpeed;
 
+
+            element.x = tmpPositionX;
+            element.y = tmpPositionY;
         });
  
     }
