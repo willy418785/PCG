@@ -44,6 +44,7 @@ export abstract class Character implements ICharacter {
     public rightSpeedAccelerationUpperBound: number;
     public leftySpeedAccelerationUpperBound: number;
     public skeleton: ContourSkeleton;
+    public collisionContour: CollisionContours;
 
     constructor(
         gravityCoefficient: number = 1,
