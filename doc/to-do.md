@@ -27,4 +27,8 @@
   - [ ] 完成 Level
   - [ ] 完成 ManagerForLevelAndCharacter
 - 20190728
-  - [ ] 測試 pointsFormula
+  - [x] 測試 pointsFormula
+- 20191020
+  - [ ] 增加地圖場景的減速
+  - [ ] 20190414[2]
+  - [ ] 再抽象 Character，增加更多Character的子類別 e.g. NPC Character
