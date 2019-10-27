@@ -1,0 +1,32 @@
+@startuml
+participant main
+participant "Player:Character" as Player
+participant ContourSkeleton
+participant CollisionContours
+participant characterDraw
+participant playerInput
+participant playerInputListener
+participant playerInputProcessor
+participant ManagerForLevelAndCharacter
+
+[-> main: initialize()
+main -> Player ++: new
+Player -> Player ++: intitializeContours()
+Player -> Player ++: new <color #118888>points</color>: Array<Point>()
+deactivate Player
+Player -> ContourSkeleton ++: new <color #42f590>skeleton</color>: ContourSkeleton(<color #118888>points</color>)
+deactivate ContourSkeleton
+Player -> Player ++: new <color #0000FF>formulas</color>(ContourSkeleton)
+deactivate Player
+Player -> CollisionContours ++: new CollisionContours(<color #42f590>skeleton</color>, <color #0000FF>formulas</color>)
+deactivate CollisionContours
+main -> characterDraw: new
+main -> playerInput: new
+main -> playerInputListener: new
+main -> playerInputListener: AddKeypressEventListener()
+main -> playerInputListener: AddClickEventListener()
+main -> playerInputProcessor: new
+main -> ManagerForLevelAndCharacter: new
+main -> ManagerForLevelAndCharacter: addCharacter(<color #118888>Player</color>);
+
+@enduml
