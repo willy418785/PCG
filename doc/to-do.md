@@ -32,3 +32,6 @@
   - [ ] 增加地圖場景的減速
   - [ ] 20190414[2]
   - [ ] 再抽象 Character，增加更多Character的子類別 e.g. NPC Character
+- 20191027
+  - [ ] draw sequence daigram to illustrate the initialization of most noteworthy class.
+  - [ ] draw sequence daigram to illustrate the data processing flow during every frame.
