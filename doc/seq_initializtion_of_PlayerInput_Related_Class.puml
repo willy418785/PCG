@@ -1,0 +1,17 @@
+@startuml
+activate main
+
+create PlayerInput
+main -> PlayerInput : new <color #FF0000>playerInput</color>: PlayerInput()
+create EventListenerHandler
+main -> EventListenerHandler: new <color #118888>playerInputListener</color>: EventListenerHandler(<color #FF0000>playerInput</color>)
+main -> EventListenerHandler: AddKeypressEventListener();
+main -> EventListenerHandler: AddClickEventListener();
+create Player
+main -> Player : new <color #03fcca>player</color>: Player()
+create PlayerInputProcessor
+main -> PlayerInputProcessor:  new <color #fcb503>playerInputProcessor</color>: PlayerInputProcessor(<color #03fcca>player</color>, <color #FF0000>playerInput</color>)
+create PlayerAction
+PlayerInputProcessor -> PlayerAction: new <color #d203fc>playerAction</color>: PlayerAction() 
+
+@enduml
