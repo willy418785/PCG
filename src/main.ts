@@ -75,9 +75,8 @@ function initialize(){
 }
 function update() {
     playerInputProcessor.process();
-    characterDraw.draw();
     levelManager.process();
-
+    characterDraw.draw();
     setTimeout(update, FRAME_INTERVAL);
 }
 
