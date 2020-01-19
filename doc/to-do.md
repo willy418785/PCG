@@ -35,3 +35,6 @@
 - 20191027
   - [ ] draw sequence daigram to illustrate the initialization of most noteworthy class.
   - [ ] draw sequence daigram to illustrate the data processing flow during every frame.
+- 20200119
+  - [ ] 把main loop改寫成window.requestAnimationFrame()
+  - [ ] 20191027[2] + 碰撞處理的流程跟細節
